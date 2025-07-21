@@ -8,6 +8,7 @@ A sophisticated command-line interface tool for downloading, managing, and
 interacting with powerful AI models completely offline.
 """
 
+
 import os
 import sys
 import json
@@ -38,6 +39,7 @@ class ModelRegistry:
     """Comprehensive registry of uncensored AI models"""
     
     MODELS = {
+        # Lightweight Models (1-5)
         "phi-2-uncensored": {
             "name": "Phi-2 Uncensored",
             "size": "1.6GB",
@@ -48,6 +50,48 @@ class ModelRegistry:
             "context_length": 2048,
             "filename": "phi-2.Q4_K_M.gguf"
         },
+        "tinyllama-1b": {
+            "name": "TinyLlama 1B Uncensored",
+            "size": "0.8GB",
+            "category": "Lightweight",
+            "description": "Extremely small but capable model",
+            "url": "https://huggingface.co/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF/resolve/main/tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf",
+            "capabilities": ["text-generation", "chat"],
+            "context_length": 2048,
+            "filename": "tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf"
+        },
+        "stablelm-zephyr-3b": {
+            "name": "StableLM Zephyr 3B Uncensored",
+            "size": "2.1GB",
+            "category": "Lightweight",
+            "description": "Stable and fast small model",
+            "url": "https://huggingface.co/TheBloke/zephyr-3B-GGUF/resolve/main/zephyr-3b.Q4_K_M.gguf",
+            "capabilities": ["text-generation", "chat"],
+            "context_length": 4096,
+            "filename": "zephyr-3b.Q4_K_M.gguf"
+        },
+        "pythia-2.8b": {
+            "name": "Pythia 2.8B Uncensored",
+            "size": "1.9GB",
+            "category": "Lightweight",
+            "description": "Efficient model from EleutherAI",
+            "url": "https://huggingface.co/TheBloke/pythia-2.8b-GGUF/resolve/main/pythia-2.8b.Q4_K_M.gguf",
+            "capabilities": ["text-generation", "chat"],
+            "context_length": 2048,
+            "filename": "pythia-2.8b.Q4_K_M.gguf"
+        },
+        "gpt2-xl-uncensored": {
+            "name": "GPT-2 XL Uncensored",
+            "size": "1.5GB",
+            "category": "Lightweight",
+            "description": "Classic model without restrictions",
+            "url": "https://huggingface.co/TheBloke/GPT2-xl-GGUF/resolve/main/gpt2-xl.Q4_K_M.gguf",
+            "capabilities": ["text-generation"],
+            "context_length": 1024,
+            "filename": "gpt2-xl.Q4_K_M.gguf"
+        },
+
+        # Medium Models (6-15)
         "llama2-7b-uncensored": {
             "name": "Llama2 7B Uncensored",
             "size": "4.1GB",
@@ -58,26 +102,6 @@ class ModelRegistry:
             "context_length": 4096,
             "filename": "llama-2-7b-chat.Q4_K_M.gguf"
         },
-        "codellama-13b": {
-            "name": "CodeLlama 13B Uncensored",
-            "size": "7.3GB",
-            "category": "Medium",
-            "description": "Specialized for code generation",
-            "url": "https://huggingface.co/TheBloke/CodeLlama-13B-Instruct-GGUF/resolve/main/codellama-13b-instruct.Q4_K_M.gguf",
-            "capabilities": ["coding", "text-generation"],
-            "context_length": 16384,
-            "filename": "codellama-13b-instruct.Q4_K_M.gguf"
-        },
-        "mixtral-8x7b": {
-            "name": "Mixtral 8x7B Uncensored",
-            "size": "26.9GB",
-            "category": "Large",
-            "description": "Mixture of experts model",
-            "url": "https://huggingface.co/TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF/resolve/main/mixtral-8x7b-instruct-v0.1.Q4_K_M.gguf",
-            "capabilities": ["text-generation", "chat", "reasoning"],
-            "context_length": 32768,
-            "filename": "mixtral-8x7b-instruct-v0.1.Q4_K_M.gguf"
-        },
         "openchat-7b": {
             "name": "OpenChat 7B Uncensored",
             "size": "4.2GB",
@@ -87,6 +111,240 @@ class ModelRegistry:
             "capabilities": ["text-generation", "chat", "reasoning"],
             "context_length": 8192,
             "filename": "openchat-3.5-0106.Q4_K_M.gguf"
+        },
+        "mistral-7b-uncensored": {
+            "name": "Mistral 7B Uncensored",
+            "size": "4.5GB",
+            "category": "Medium",
+            "description": "High quality 7B parameter model",
+            "url": "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.1-GGUF/resolve/main/mistral-7b-instruct-v0.1.Q4_K_M.gguf",
+            "capabilities": ["text-generation", "chat", "reasoning"],
+            "context_length": 8192,
+            "filename": "mistral-7b-instruct-v0.1.Q4_K_M.gguf"
+        },
+        "wizardlm-7b": {
+            "name": "WizardLM 7B Uncensored",
+            "size": "4.3GB",
+            "category": "Medium",
+            "description": "Specialized for complex instructions",
+            "url": "https://huggingface.co/TheBloke/WizardLM-7B-V1.0-GGUF/resolve/main/wizardlm-7b-v1.0.Q4_K_M.gguf",
+            "capabilities": ["text-generation", "chat", "reasoning"],
+            "context_length": 4096,
+            "filename": "wizardlm-7b-v1.0.Q4_K_M.gguf"
+        },
+        "dolphin-2.6-7b": {
+            "name": "Dolphin 2.6 7B Uncensored",
+            "size": "4.4GB",
+            "category": "Medium",
+            "description": "Fine-tuned for uncensored responses",
+            "url": "https://huggingface.co/TheBloke/dolphin-2.6-mistral-7B-GGUF/resolve/main/dolphin-2.6-mistral-7b.Q4_K_M.gguf",
+            "capabilities": ["text-generation", "chat"],
+            "context_length": 8192,
+            "filename": "dolphin-2.6-mistral-7b.Q4_K_M.gguf"
+        },
+        "neural-chat-7b": {
+            "name": "Neural Chat 7B Uncensored",
+            "size": "4.3GB",
+            "category": "Medium",
+            "description": "Optimized for conversational AI",
+            "url": "https://huggingface.co/TheBloke/neural-chat-7B-v3-1-GGUF/resolve/main/neural-chat-7b-v3-1.Q4_K_M.gguf",
+            "capabilities": ["text-generation", "chat"],
+            "context_length": 4096,
+            "filename": "neural-chat-7b-v3-1.Q4_K_M.gguf"
+        },
+        "openhermes-7b": {
+            "name": "OpenHermes 7B Uncensored",
+            "size": "4.3GB",
+            "category": "Medium",
+            "description": "Fine-tuned on diverse datasets",
+            "url": "https://huggingface.co/TheBloke/OpenHermes-7B-GGUF/resolve/main/openhermes-7b.Q4_K_M.gguf",
+            "capabilities": ["text-generation", "chat", "reasoning"],
+            "context_length": 4096,
+            "filename": "openhermes-7b.Q4_K_M.gguf"
+        },
+        "solar-7b": {
+            "name": "SOLAR 7B Uncensored",
+            "size": "4.5GB",
+            "category": "Medium",
+            "description": "Efficient 7B model with strong performance",
+            "url": "https://huggingface.co/TheBloke/solar-7B-GGUF/resolve/main/solar-7b.Q4_K_M.gguf",
+            "capabilities": ["text-generation", "chat", "coding"],
+            "context_length": 8192,
+            "filename": "solar-7b.Q4_K_M.gguf"
+        },
+        "mistral-7b-openorca": {
+            "name": "Mistral 7B OpenOrca Uncensored",
+            "size": "4.5GB",
+            "category": "Medium",
+            "description": "Trained on the OpenOrca dataset",
+            "url": "https://huggingface.co/TheBloke/Mistral-7B-OpenOrca-GGUF/resolve/main/mistral-7b-openorca.Q4_K_M.gguf",
+            "capabilities": ["text-generation", "chat", "reasoning"],
+            "context_length": 8192,
+            "filename": "mistral-7b-openorca.Q4_K_M.gguf"
+        },
+        "zephyr-7b-beta": {
+            "name": "Zephyr 7B Beta Uncensored",
+            "size": "4.2GB",
+            "category": "Medium",
+            "description": "Alignment-free version of Zephyr",
+            "url": "https://huggingface.co/TheBloke/zephyr-7B-beta-GGUF/resolve/main/zephyr-7b-beta.Q4_K_M.gguf",
+            "capabilities": ["text-generation", "chat"],
+            "context_length": 4096,
+            "filename": "zephyr-7b-beta.Q4_K_M.gguf"
+        },
+
+        # Large Models (16-25)
+        "llama2-13b-uncensored": {
+            "name": "Llama2 13B Uncensored",
+            "size": "7.8GB",
+            "category": "Large",
+            "description": "More powerful 13B parameter model",
+            "url": "https://huggingface.co/TheBloke/Llama-2-13B-Chat-GGUF/resolve/main/llama-2-13b-chat.Q4_K_M.gguf",
+            "capabilities": ["text-generation", "chat", "coding"],
+            "context_length": 4096,
+            "filename": "llama-2-13b-chat.Q4_K_M.gguf"
+        },
+        "codellama-13b": {
+            "name": "CodeLlama 13B Uncensored",
+            "size": "7.3GB",
+            "category": "Large",
+            "description": "Specialized for code generation",
+            "url": "https://huggingface.co/TheBloke/CodeLlama-13B-Instruct-GGUF/resolve/main/codellama-13b-instruct.Q4_K_M.gguf",
+            "capabilities": ["coding", "text-generation"],
+            "context_length": 16384,
+            "filename": "codellama-13b-instruct.Q4_K_M.gguf"
+        },
+        "wizardlm-13b": {
+            "name": "WizardLM 13B Uncensored",
+            "size": "7.9GB",
+            "category": "Large",
+            "description": "13B version of WizardLM",
+            "url": "https://huggingface.co/TheBloke/WizardLM-13B-V1.2-GGUF/resolve/main/wizardlm-13b-v1.2.Q4_K_M.gguf",
+            "capabilities": ["text-generation", "chat", "reasoning"],
+            "context_length": 4096,
+            "filename": "wizardlm-13b-v1.2.Q4_K_M.gguf"
+        },
+        "nous-hermes-13b": {
+            "name": "Nous-Hermes 13B Uncensored",
+            "size": "7.8GB",
+            "category": "Large",
+            "description": "High quality 13B parameter model",
+            "url": "https://huggingface.co/TheBloke/Nous-Hermes-13B-GGUF/resolve/main/nous-hermes-13b.Q4_K_M.gguf",
+            "capabilities": ["text-generation", "chat", "reasoning"],
+            "context_length": 4096,
+            "filename": "nous-hermes-13b.Q4_K_M.gguf"
+        },
+        "chronos-13b": {
+            "name": "Chronos 13B Uncensored",
+            "size": "7.7GB",
+            "category": "Large",
+            "description": "Temporal understanding capabilities",
+            "url": "https://huggingface.co/TheBloke/chronos-13B-GGUF/resolve/main/chronos-13b.Q4_K_M.gguf",
+            "capabilities": ["text-generation", "chat", "temporal-reasoning"],
+            "context_length": 4096,
+            "filename": "chronos-13b.Q4_K_M.gguf"
+        },
+        "mythomax-13b": {
+            "name": "MythoMax 13B Uncensored",
+            "size": "7.9GB",
+            "category": "Large",
+            "description": "Mythological and creative writing",
+            "url": "https://huggingface.co/TheBloke/MythoMax-L2-13B-GGUF/resolve/main/mythomax-l2-13b.Q4_K_M.gguf",
+            "capabilities": ["text-generation", "creative-writing"],
+            "context_length": 4096,
+            "filename": "mythomax-l2-13b.Q4_K_M.gguf"
+        },
+        "xwin-13b": {
+            "name": "Xwin 13B Uncensored",
+            "size": "7.8GB",
+            "category": "Large",
+            "description": "Optimized for winning user preferences",
+            "url": "https://huggingface.co/TheBloke/Xwin-LM-13B-V0.1-GGUF/resolve/main/xwin-lm-13b-v0.1.Q4_K_M.gguf",
+            "capabilities": ["text-generation", "chat"],
+            "context_length": 4096,
+            "filename": "xwin-lm-13b-v0.1.Q4_K_M.gguf"
+        },
+        "airoboros-13b": {
+            "name": "Airoboros 13B Uncensored",
+            "size": "7.7GB",
+            "category": "Large",
+            "description": "Fine-tuned on diverse synthetic data",
+            "url": "https://huggingface.co/TheBloke/airoboros-13B-gpt4-1.4-GGUF/resolve/main/airoboros-13b-gpt4-1.4.Q4_K_M.gguf",
+            "capabilities": ["text-generation", "chat"],
+            "context_length": 4096,
+            "filename": "airoboros-13b-gpt4-1.4.Q4_K_M.gguf"
+        },
+        "orca-13b": {
+            "name": "Orca 13B Uncensored",
+            "size": "7.8GB",
+            "category": "Large",
+            "description": "Microsoft's Orca model without restrictions",
+            "url": "https://huggingface.co/TheBloke/Orca-2-13B-GGUF/resolve/main/orca-2-13b.Q4_K_M.gguf",
+            "capabilities": ["text-generation", "chat", "reasoning"],
+            "context_length": 4096,
+            "filename": "orca-2-13b.Q4_K_M.gguf"
+        },
+        "samantha-13b": {
+            "name": "Samantha 13B Uncensored",
+            "size": "7.7GB",
+            "category": "Large",
+            "description": "Companion-style conversational AI",
+            "url": "https://huggingface.co/TheBloke/Samantha-13B-GGUF/resolve/main/samantha-13b.Q4_K_M.gguf",
+            "capabilities": ["text-generation", "chat"],
+            "context_length": 4096,
+            "filename": "samantha-13b.Q4_K_M.gguf"
+        },
+
+        # Extra Large Models (26-30)
+        "mixtral-8x7b": {
+            "name": "Mixtral 8x7B Uncensored",
+            "size": "26.9GB",
+            "category": "Extra Large",
+            "description": "Mixture of experts model",
+            "url": "https://huggingface.co/TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF/resolve/main/mixtral-8x7b-instruct-v0.1.Q4_K_M.gguf",
+            "capabilities": ["text-generation", "chat", "reasoning"],
+            "context_length": 32768,
+            "filename": "mixtral-8x7b-instruct-v0.1.Q4_K_M.gguf"
+        },
+        "llama2-70b-uncensored": {
+            "name": "Llama2 70B Uncensored",
+            "size": "39.5GB",
+            "category": "Extra Large",
+            "description": "Most powerful uncensored Llama2 variant",
+            "url": "https://huggingface.co/TheBloke/Llama-2-70B-Chat-GGUF/resolve/main/llama-2-70b-chat.Q4_K_M.gguf",
+            "capabilities": ["text-generation", "chat", "coding", "reasoning"],
+            "context_length": 4096,
+            "filename": "llama-2-70b-chat.Q4_K_M.gguf"
+        },
+        "goliath-120b": {
+            "name": "Goliath 120B Uncensored",
+            "size": "61.4GB",
+            "category": "Extra Large",
+            "description": "Massive uncensored model for research",
+            "url": "https://huggingface.co/TheBloke/goliath-120B-GGUF/resolve/main/goliath-120b.Q4_K_M.gguf",
+            "capabilities": ["text-generation", "chat", "reasoning"],
+            "context_length": 8192,
+            "filename": "goliath-120b.Q4_K_M.gguf"
+        },
+        "yi-34b": {
+            "name": "Yi 34B Uncensored",
+            "size": "20.1GB",
+            "category": "Extra Large",
+            "description": "High-performance Chinese-English model",
+            "url": "https://huggingface.co/TheBloke/Yi-34B-GGUF/resolve/main/yi-34b.Q4_K_M.gguf",
+            "capabilities": ["text-generation", "chat", "multilingual"],
+            "context_length": 4096,
+            "filename": "yi-34b.Q4_K_M.gguf"
+        },
+        "dolphin-2.7-mixtral": {
+            "name": "Dolphin 2.7 Mixtral Uncensored",
+            "size": "27.1GB",
+            "category": "Extra Large",
+            "description": "Uncensored Mixtral fine-tune",
+            "url": "https://huggingface.co/TheBloke/dolphin-2.7-mixtral-8x7b-GGUF/resolve/main/dolphin-2.7-mixtral-8x7b.Q4_K_M.gguf",
+            "capabilities": ["text-generation", "chat"],
+            "context_length": 32768,
+            "filename": "dolphin-2.7-mixtral-8x7b.Q4_K_M.gguf"
         }
     }
 
