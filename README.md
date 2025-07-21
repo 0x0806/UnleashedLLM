@@ -202,7 +202,7 @@ Developed by 0x0806
 
 ---
 
-**Version**: 1.0.0  
-**Last Updated**: 2024  
+**Version**: 1.1.0  
+**Last Updated**: 2025 
 **Platform**: Linux/Nix Environment  
 **Python Version**: 3.11+
