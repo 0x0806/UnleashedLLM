@@ -11,6 +11,7 @@ UnleashedLLM is a comprehensive Python application that provides seamless access
 
 ## Features
 
+
 ### Core Functionality
 - **Model Management**: Download and manage AI models from a curated registry
 - **Interactive Chat**: Engage in real-time conversations with AI models
